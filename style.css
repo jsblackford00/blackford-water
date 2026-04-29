@@ -1,14 +1,54 @@
-:root{
-  --map-height: calc(100vh - 140px);
-  --accent: #0b6fbf;
-  --muted: #666;
-}
-body{ margin:0; font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial; color:#111; }
-header{ padding:12px 16px; background:#f7f9fb; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #e6eef8; }
-header h1{ margin:0; font-size:18px; }
-.controls{ display:flex; gap:12px; align-items:center; }
-main{ display:flex; }
-#map{ flex:1; height:var(--map-height); }
-#sidebar{ width:320px; padding:12px; border-left:1px solid #eee; background:#fff; overflow:auto; }
-footer{ padding:8px 16px; font-size:12px; color:var(--muted); background:#fff; border-top:1px solid #eee; }
-.leaflet-popup-content{ font-size:14px; }
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blackford Water</title>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- MarkerCluster -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header>
+    <div class="brand">
+      <h1>Blackford Water</h1>
+      <div class="tag">Colorado River Basin monitoring</div>
+    </div>
+
+    <div class="controls">
+      <label class="toggle">
+        <input id="toggle-discharge" type="checkbox" checked />
+        <span>Streamflow</span>
+      </label>
+
+      <select id="state-select" aria-label="Select state or basin">
+        <option value="ALL">Entire Colorado River Basin</option>
+        <option value="CO">Colorado</option>
+        <option value="NM">New Mexico</option>
+        <option value="WY">Wyoming</option>
+        <option value="UT" selected>Utah</option>
+        <option value="AZ">Arizona</option>
+        <option value="NV">Nevada</option>
+        <option value="CA">California</option>
+      </select>
+
+      <button id="refresh-btn" title="Reload data">Refresh</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="map" role="application" aria-label="Map showing streamflow gages"></div>
+
+    <aside id="sidebar" aria-live="polite">
+      <h2>Basin Summary</h2>
+      <div id="summary">Loading…</div>
+      <div id="notes" class="muted">
+        Toggle stream
