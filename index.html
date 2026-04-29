@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Water Tracker MVP</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Water Tracker MVP</h1>
+    <div class="controls">
+      <label><input id="toggle-discharge" type="checkbox" checked /> Show streamflow (cfs)</label>
+      <select id="state-select">
+        <option value="UT">Utah</option>
+        <option value="CO">Colorado</option>
+        <option value="CA">California</option>
+        <option value="WA">Washington</option>
+      </select>
+      <button id="refresh-btn">Refresh</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="map"></div>
+    <aside id="sidebar">
+      <h2>Selected Basin Summary</h2>
+      <div id="summary">Click a gage on the map to see details.</div>
+    </aside>
+  </main>
+
+  <footer>
+    <small>Data sources: USGS Water Services. Demo only.</small>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
