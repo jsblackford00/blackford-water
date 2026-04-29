@@ -4,19 +4,33 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Blackford Water</title>
+
+  <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MarkerCluster -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
 
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
   <header>
-    <h1>Blackford Water</h1>
+    <div class="brand">
+      <h1>Blackford Water</h1>
+      <div class="tag">Colorado River Basin monitoring</div>
+    </div>
+
     <div class="controls">
-      <label><input id="toggle-discharge" type="checkbox" checked /> Show streamflow (cfs)</label>
-      <select id="state-select">
-        <option value="ALL">Show entire Colorado River Basin</option>
+      <label class="toggle">
+        <input id="toggle-discharge" type="checkbox" checked />
+        <span>Streamflow</span>
+      </label>
+
+      <select id="state-select" aria-label="Select state or basin">
+        <option value="ALL">Entire Colorado River Basin</option>
         <option value="CO">Colorado</option>
         <option value="NM">New Mexico</option>
         <option value="WY">Wyoming</option>
@@ -25,26 +39,16 @@
         <option value="NV">Nevada</option>
         <option value="CA">California</option>
       </select>
-      <button id="refresh-btn">Refresh</button>
+
+      <button id="refresh-btn" title="Reload data">Refresh</button>
     </div>
   </header>
 
   <main>
-    <div id="map"></div>
-    <aside id="sidebar">
-      <h2>Selected Basin Summary</h2>
-      <div id="summary">Click a gage on the map to see details.</div>
-    </aside>
-  </main>
+    <div id="map" role="application" aria-label="Map showing streamflow gages"></div>
 
-  <footer>
-    <small>Data sources: USGS Water Services. Demo only.</small>
-  </footer>
-
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="main.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-
-</body>
-</html>
+    <aside id="sidebar" aria-live="polite">
+      <h2>Basin Summary</h2>
+      <div id="summary">Loading…</div>
+      <div id="notes" class="muted">
+        Toggle stream
